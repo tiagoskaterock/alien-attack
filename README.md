@@ -24,10 +24,6 @@
 
 1. Clone este repositório:
 
-    ```bash
-    git clone https://github.com/seu-usuario/alien-attack.git
-    ```
-
 2. Abra o projeto na Godot 4.0.
 
 3. Execute o jogo no editor ou exporte para sua plataforma preferida.
