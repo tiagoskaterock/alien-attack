@@ -1,27 +1,36 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
+const SPEED : float = 300.0
+const SHIP_SIZE_Y : int = 50
+const SHIP_SIZE_X : int = 40
 
 func _physics_process(delta):
-	# Inicializa a variável de direção como um vetor zero.
+	handle_movement(delta)
+	
+
+func handle_movement(delta):
 	var direction = Vector2.ZERO
 
 	# Captura a entrada do jogador para as direções
+	# E limita o movimento pelo tamnho da tela
 	if Input.is_action_pressed("ui_up"):
-		direction.y -= 1
+		if position.y > SHIP_SIZE_Y:
+			direction.y -= 1
 	if Input.is_action_pressed("ui_down"):
-		direction.y += 1
+		if position.y < DisplayServer.screen_get_size().y - SHIP_SIZE_Y:
+			direction.y += 1
 	if Input.is_action_pressed("ui_left"):
-		direction.x -= 1
+		if position.x > SHIP_SIZE_X:
+			direction.x -= 1
 	if Input.is_action_pressed("ui_right"):
-		direction.x += 1
+		if position.x < DisplayServer.screen_get_size().x - SHIP_SIZE_X:
+			direction.x += 1
 
 	# Normaliza o vetor de direção para evitar movimento mais rápido em diagonais
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
 
-	# Define a velocidade com base na direção
 	velocity = direction * SPEED
-
-	# Move a nave usando move_and_slide
+	
 	move_and_slide()
+	
