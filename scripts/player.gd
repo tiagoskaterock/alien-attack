@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
-const SPEED : float = 300.0
+@export var speed : float = 500
+
 const SHIP_SIZE_Y : int = 50
 const SHIP_SIZE_X : int = 40
 
 func _physics_process(delta):
-	handle_movement(delta)
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
+	handle_movement(delta)	
 	
 
 func handle_movement(delta):
@@ -13,16 +16,16 @@ func handle_movement(delta):
 
 	# Captura a entrada do jogador para as direções
 	# E limita o movimento pelo tamnho da tela
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("up"):
 		if position.y > SHIP_SIZE_Y:
 			direction.y -= 1
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("down"):
 		if position.y < DisplayServer.screen_get_size().y - SHIP_SIZE_Y:
 			direction.y += 1
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("left"):
 		if position.x > SHIP_SIZE_X:
 			direction.x -= 1
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("right"):
 		if position.x < DisplayServer.screen_get_size().x - SHIP_SIZE_X:
 			direction.x += 1
 
@@ -30,7 +33,16 @@ func handle_movement(delta):
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
 
-	velocity = direction * SPEED
+	velocity = direction * speed
 	
 	move_and_slide()
 	
+
+
+func shoot():
+	var pre_shoot = preload("res://scenes/rocket.tscn")
+	var shoot = pre_shoot.instantiate()
+	shoot.position.y = position.y
+	shoot.position.x = position.x + SHIP_SIZE_X
+	get_parent().add_child(shoot)
+		
