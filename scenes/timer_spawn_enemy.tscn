@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://he4jo6qjnbqt"]
+
+[ext_resource type="Script" path="res://scripts/timer_spawn_enemy.gd" id="1_3sb7h"]
+
+[node name="TimerSpawnEnemy" type="Timer"]
+script = ExtResource("1_3sb7h")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

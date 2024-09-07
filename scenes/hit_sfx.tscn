@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyqoqsqpnme61"]
+
+[ext_resource type="AudioStream" uid="uid://ry6hiub3nw40" path="res://assets/audio/hit.wav" id="1_gp2rl"]
+[ext_resource type="Script" path="res://scripts/hit_sfx.gd" id="2_veku7"]
+
+[node name="HitSFX" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_gp2rl")
+script = ExtResource("2_veku7")
+
+[node name="TimerToFinish" type="Timer" parent="."]
+
+[connection signal="timeout" from="TimerToFinish" to="." method="_on_timer_to_finish_timeout"]

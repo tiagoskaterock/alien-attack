@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlc1ccjc24ygt"]
+
+[ext_resource type="AudioStream" uid="uid://cw3tfifxs4vbg" path="res://assets/audio/sfx_laser2.wav" id="1_yxsbf"]
+[ext_resource type="Script" path="res://scripts/rocket_sfx.gd" id="2_2m3dn"]
+
+[node name="RocketSFX" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_yxsbf")
+autoplay = true
+script = ExtResource("2_2m3dn")
+
+[node name="TimerToFinish" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="TimerToFinish" to="." method="_on_timer_to_finish_timeout"]
