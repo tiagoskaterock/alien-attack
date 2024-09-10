@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwl3g8sfkecq0"]
+
+[ext_resource type="AudioStream" uid="uid://efl5qebgskyt" path="res://assets/audio/explode.wav" id="1_nhqs5"]
+
+[node name="DeathSFX" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_nhqs5")
+autoplay = true

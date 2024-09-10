@@ -26,3 +26,8 @@ func set_speed(new_speed : float) -> void:
 
 func die():
 	queue_free()
+
+
+func _on_body_entered(body):
+	if body is Player:
+		body.die()

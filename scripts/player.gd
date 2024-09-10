@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Player
+
 @export var speed : float = 500
 
 const SHIP_SIZE_Y : int = 50
@@ -38,11 +40,22 @@ func handle_movement(delta):
 	move_and_slide()
 	
 
-
-func shoot():
+func shoot() -> void:
 	var pre_shoot = preload("res://scenes/rocket.tscn")
 	var shoot = pre_shoot.instantiate()
 	shoot.position.y = position.y
 	shoot.position.x = position.x + SHIP_SIZE_X
 	get_parent().add_child(shoot)
 		
+
+
+func die() -> void: 
+	death_SFX()
+	queue_free()
+	
+	
+func death_SFX():
+	var sfx = preload("res://scenes/death_sfx.tscn").instantiate()
+	get_parent().add_child(sfx)
+	
+	
