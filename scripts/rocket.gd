@@ -24,7 +24,9 @@ func _on_area_entered(area):
 	if area is Enemy:
 		area.die()
 		play_hit_sfx()
+		get_parent().add_points(50)
 		die()
+		
 
 
 func die() -> void:

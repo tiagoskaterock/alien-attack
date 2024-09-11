@@ -3,6 +3,7 @@ extends CharacterBody2D
 class_name Player
 
 @export var speed : float = 500
+var lives : int = 3
 
 const SHIP_SIZE_Y : int = 50
 const SHIP_SIZE_X : int = 40

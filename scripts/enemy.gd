@@ -5,6 +5,8 @@ class_name Enemy
 const MIN_SPEED : float = 300.0
 const MAX_SPEED : float = 700.0
 const ENEMY_DISTANCE_FROM_BORDER : int = 50
+const POINTS_PER_DEATH = 50
+
 var speed : float
 
 
@@ -30,4 +32,7 @@ func die():
 
 func _on_body_entered(body):
 	if body is Player:
+		die()
 		body.die()
+		
+		
