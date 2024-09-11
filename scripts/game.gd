@@ -15,5 +15,14 @@ func _process(delta):
 
 func add_points(points) -> void :
 	score += points
-	print(score)
+	update_score_on_hud()
+	
+	
+func get_score() -> int:
+	return score
+	
+	
+func update_score_on_hud():
+	$UI/Hud.update_score(get_score())
+	
 	
