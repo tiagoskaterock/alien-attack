@@ -51,8 +51,15 @@ func shoot() -> void:
 
 
 func die() -> void: 
+	get_parent().lose_life()
 	death_SFX()
-	queue_free()
+	$TimerToRespawn.start()
+	hide_player()
+	
+	
+func hide_player() -> void:
+	visible = false
+	$CollisionShape2D.call_deferred("set_disabled", true)
 	
 	
 func death_SFX():
@@ -60,3 +67,20 @@ func death_SFX():
 	get_parent().add_child(sfx)
 	
 	
+
+func _on_timer_to_respawn_timeout():
+	respawn()
+
+
+func respawn() -> void:
+	go_back_to_start_position()
+	show_player()
+
+
+func go_back_to_start_position():
+	position = get_parent().get_node("PlayerStart").position
+	
+	
+func show_player() -> void:
+	visible = true
+	$CollisionShape2D.call_deferred("set_disabled", false)

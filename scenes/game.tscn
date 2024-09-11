@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7v4soowuwyv1"]
+[gd_scene load_steps=7 format=3 uid="uid://c7v4soowuwyv1"]
 
 [ext_resource type="Texture2D" uid="uid://bw0iiffq1q7bg" path="res://assets/textures/bg.png" id="1_lw86q"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_ukfit"]
 [ext_resource type="PackedScene" uid="uid://fk534b0n37sp" path="res://scenes/hud.tscn" id="2_n22h3"]
 [ext_resource type="PackedScene" uid="uid://dqy8x0os0s7eb" path="res://scenes/player.tscn" id="2_nk3lg"]
 [ext_resource type="PackedScene" uid="uid://he4jo6qjnbqt" path="res://scenes/timer_spawn_enemy.tscn" id="4_k6uo3"]
+[ext_resource type="PackedScene" uid="uid://q2cnm0tell8m" path="res://scenes/player_start.tscn" id="6_b576f"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ukfit")
@@ -20,6 +21,8 @@ texture = ExtResource("1_lw86q")
 stretch_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("2_nk3lg")]
-position = Vector2(632, 328)
+position = Vector2(96, 328)
 
 [node name="TimerSpawnEnemy" parent="." instance=ExtResource("4_k6uo3")]
+
+[node name="PlayerStart" parent="." instance=ExtResource("6_b576f")]

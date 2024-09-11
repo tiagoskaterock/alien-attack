@@ -18,3 +18,9 @@ texture = ExtResource("1_ajwuc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(3.56, 3.56)
 shape = SubResource("CircleShape2D_0qqpg")
+
+[node name="TimerToRespawn" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="TimerToRespawn" to="." method="_on_timer_to_respawn_timeout"]
