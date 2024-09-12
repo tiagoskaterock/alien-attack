@@ -3,15 +3,18 @@ extends CharacterBody2D
 class_name Player
 
 @export var speed : float = 500
-var lives : int = 3
+@export var lives : int = 3
+var can_shoot : bool = true
+var is_alive = true
 
 const SHIP_SIZE_Y : int = 50
 const SHIP_SIZE_X : int = 40
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("shoot"):
+	is_alive = lives > 0
+	if Input.is_action_just_pressed("shoot") and can_shoot:
 		shoot()
-	handle_movement(delta)	
+	handle_movement(delta)
 	
 
 func handle_movement(delta):
@@ -51,10 +54,11 @@ func shoot() -> void:
 
 
 func die() -> void: 
-	get_parent().lose_life()
+	lose_life()
 	death_SFX()
 	$TimerToRespawn.start()
 	hide_player()
+	can_shoot = false
 	
 	
 func hide_player() -> void:
@@ -69,12 +73,30 @@ func death_SFX():
 	
 
 func _on_timer_to_respawn_timeout():
-	respawn()
+	if is_alive:
+		respawn()
 
 
 func respawn() -> void:
 	go_back_to_start_position()
 	show_player()
+	can_shoot = true
+	
+	
+func set_lives(new_lives) -> void:
+	lives = new_lives
+	get_parent().update_lives_on_hud()
+	
+	
+func lose_life() -> void:
+	set_lives(get_lives() - 1)
+	if get_lives() <= 0:
+		game_over()
+		
+		
+func game_over() -> void:
+	await get_tree().create_timer(1.5).timeout
+	get_parent().game_over()
 
 
 func go_back_to_start_position():
@@ -84,3 +106,8 @@ func go_back_to_start_position():
 func show_player() -> void:
 	visible = true
 	$CollisionShape2D.call_deferred("set_disabled", false)
+
+
+func get_lives():
+	return lives
+
