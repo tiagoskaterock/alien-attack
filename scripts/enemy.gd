@@ -2,16 +2,16 @@ extends Area2D
 
 class_name Enemy
 
-const MIN_SPEED : float = 300.0
-const MAX_SPEED : float = 700.0
+const MIN_SPEED : float = 500.0
+const MAX_SPEED : float = 1700.0
 const ENEMY_DISTANCE_FROM_BORDER : int = 50
 const POINTS_PER_DEATH = 50
 
-var speed : float
+@export var speed : float = 0
 
 
-func _ready():
-	set_speed(randf_range(100, 500))
+func _ready():	
+#	set_speed(randf_range(MIN_SPEED, MAX_SPEED))
 	position.x = DisplayServer.screen_get_size().x + ENEMY_DISTANCE_FROM_BORDER
 	position.y = randi_range(ENEMY_DISTANCE_FROM_BORDER, DisplayServer.screen_get_size().y - ENEMY_DISTANCE_FROM_BORDER)	
 
